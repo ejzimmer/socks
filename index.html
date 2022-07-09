@@ -42,9 +42,11 @@
         )
 
         const messageContainer = document.getElementById("message")
-        const message =
-          decodeURIComponent(params.error) ||
-          (params.name ? `${params.name} added` : "")
+        const message = params.error
+          ? decodeURIComponent(params.error)
+          : params.name
+          ? `${params.name} added`
+          : ""
         messageContainer.innerText = message
 
         const response = await fetch("/.netlify/functions/listPeople").then(
