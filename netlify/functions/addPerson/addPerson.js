@@ -9,7 +9,7 @@ const supabase = createClient(DATABASE_URL, SUPABASE_SERVICE_API_KEY)
 
 // Our standard serverless handler function
 exports.handler = async (event) => {
-  const person = JSON.parse(event.body)
+  const person = event.body
   console.log(person)
 
   // Insert a row
