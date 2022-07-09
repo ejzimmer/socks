@@ -5,9 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Socks</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div id="message"></div>
+    <table id="sizes" class="hidden">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Size</td>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
     <form action="/.netlify/functions/addPerson" method="POST">
       <label for="name">Name</label>
       <input id="name" name="name" />
@@ -29,8 +43,20 @@
 
         const messageContainer = document.getElementById("message")
         const message =
-          params.error || (params.name ? `${params.name} added` : "")
+         decodeURIComponent(params.error) || (params.name ? `${params.name} added` : "")
         messageContainer.innerText = message
+
+        const response = await fetch("/.netlify/functions/listPeople").then((response) =>
+          response.json()
+        )
+        console.log(response)
+        if (response.data) {
+          const tableRows = response.data.map(person => {
+            const tr = document.createElement('tr')
+            tr.innerHtml = `<td>${person.name}</td><td>${person.size}</td>`
+            return tr
+          })
+        }
       }
     </script>
   </body>
