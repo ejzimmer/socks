@@ -18,7 +18,9 @@ exports.handler = async (event) => {
   console.log(data, error)
 
   return {
-    statusCode: 302,
-    location: "/index.html",
+    statusCode: 303,
+    headers: {
+      Location: "/index.html",
+    },
   }
 }
