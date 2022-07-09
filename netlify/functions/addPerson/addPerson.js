@@ -1,4 +1,4 @@
-const { supabase } = require("../getSupabase.js")
+const { supabase } = require("../../../getSupabase.js")
 
 exports.handler = async (event) => {
   const person = Object.fromEntries(

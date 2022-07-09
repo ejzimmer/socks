@@ -1,4 +1,4 @@
-const { supabase } = require("../getSupabase.js")
+const { supabase } = require("../../../getSupabase.js")
 
 const handler = async () => {
   const { data, error } = await supabase.from("sizes").select("*")

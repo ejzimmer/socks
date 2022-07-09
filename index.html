@@ -32,7 +32,7 @@
       <button>Save</button>
     </form>
     <script>
-      document.body.onload = function () {
+      document.body.onload = async function () {
         const queryParams = location.search
         const params = Object.fromEntries(
           queryParams
@@ -43,16 +43,17 @@
 
         const messageContainer = document.getElementById("message")
         const message =
-         decodeURIComponent(params.error) || (params.name ? `${params.name} added` : "")
+          decodeURIComponent(params.error) ||
+          (params.name ? `${params.name} added` : "")
         messageContainer.innerText = message
 
-        const response = await fetch("/.netlify/functions/listPeople").then((response) =>
-          response.json()
+        const response = await fetch("/.netlify/functions/listPeople").then(
+          (response) => response.json()
         )
         console.log(response)
         if (response.data) {
-          const tableRows = response.data.map(person => {
-            const tr = document.createElement('tr')
+          const tableRows = response.data.map((person) => {
+            const tr = document.createElement("tr")
             tr.innerHtml = `<td>${person.name}</td><td>${person.size}</td>`
             return tr
           })
