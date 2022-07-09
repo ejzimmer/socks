@@ -7,12 +7,12 @@
     <title>Socks</title>
   </head>
   <body>
-    <form action="/.netlify/functions/addPerson">
+    <form action="/.netlify/functions/addPerson" method="POST">
       <label for="name">Name</label>
-      <input id="name" />
+      <input id="name" name="name" />
 
       <label for="size">Size</label>
-      <input id="size" />
+      <input id="size" name="size" />
 
       <button>Save</button>
     </form>
