@@ -20,7 +20,7 @@ exports.handler = async (event) => {
     return {
       statusCode: 303,
       headers: {
-        Location: `/index.html?error=${error.details}`,
+        Location: `/index.html?error=${encodeURIComponent(error.details)}`,
       },
     }
   }

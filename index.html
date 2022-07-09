@@ -28,7 +28,8 @@
         )
 
         const messageContainer = document.getElementById("message")
-        const message = params.error || params.name || ""
+        const message =
+          params.error || params.name ? `${params.name} added` : ""
         messageContainer.innerText = message
       }
     </script>
