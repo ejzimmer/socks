@@ -13,9 +13,12 @@ exports.handler = async (event) => {
     event.body.split("&").map((entry) => entry.split("="))
   )
 
-  // Insert a row
   const { data, error } = await supabase.from("sizes").insert([person])
 
-  // Did it work?
   console.log(data, error)
+
+  return {
+    statusCode: 302,
+    location: "/index.html",
+  }
 }
