@@ -14,13 +14,21 @@ exports.handler = async (event) => {
   )
 
   const { data, error } = await supabase.from("sizes").insert([person])
-
   console.log(data, error)
+
+  if (error) {
+    return {
+      statusCode: 303,
+      headers: {
+        Location: `/index.html?error=${error.details}`,
+      },
+    }
+  }
 
   return {
     statusCode: 303,
     headers: {
-      Location: "/index.html",
+      Location: `/index.html?name=${person.name}`,
     },
   }
 }

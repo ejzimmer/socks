@@ -7,6 +7,7 @@
     <title>Socks</title>
   </head>
   <body>
+    <div id="message"></div>
     <form action="/.netlify/functions/addPerson" method="POST">
       <label for="name">Name</label>
       <input id="name" name="name" />
@@ -16,5 +17,17 @@
 
       <button>Save</button>
     </form>
+    <script>
+      document.body.onload = function () {
+        const queryParams = location.search
+        const params = Object.fromEntries(
+          queryParams.split("&").map((entry) => entry.split("="))
+        )
+
+        const messageContainer = document.getElementById("message")
+        const message = params.error || params.name
+        messageContainer.innerText = message
+      }
+    </script>
   </body>
 </html>
