@@ -17,7 +17,8 @@
       <thead>
         <tr>
           <td>Name</td>
-          <td>Size</td>
+          <td>Cast-on stitches</td>
+          <td>Foot length</td>
         </tr>
       </thead>
       <tbody></tbody>
@@ -26,8 +27,15 @@
       <label for="name">Name</label>
       <input id="name" name="name" />
 
-      <label for="size">Size</label>
-      <input id="size" name="size" />
+      <label for="size">EU Size</label>
+      <input id="size" name="size" type="number" min="34" />
+
+      <div>or</div>
+
+      <label for="size">Circumference (")</label>
+      <input id="size" name="size" type="number" min="4" />
+      <label for="size">Length (mm)</label>
+      <input id="size" name="size" type="number" min="200" />
 
       <button>Save</button>
     </form>
@@ -53,8 +61,10 @@
           (response) => response.json()
         )
         const tableRows = response.map((person) => {
+          const castOnStitches = person.circumference * 8
+
           const tr = document.createElement("tr")
-          tr.innerHTML = `<td>${person.name}</td><td>${person.size}</td>`
+          tr.innerHTML = `<td>${person.name}</td><td>${castOnStitches}</td><td>${person.length}</td>`
           return tr
         })
 
