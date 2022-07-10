@@ -44,8 +44,9 @@ exports.handler = async (event) => {
     event.body.split("&").map((entry) => entry.split("="))
   )
 
-  const circumference = person.circumference || SIZES[person.size].circumference
-  const length = person.length || SIZES[person.size].length
+  const size = `${person.size}`
+  const circumference = person.circumference || SIZES[size].circumference
+  const length = person.length || SIZES[size].length
 
   const entry = {
     name: person.name,
