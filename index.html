@@ -52,13 +52,18 @@
         const response = await fetch("/.netlify/functions/listPeople").then(
           (response) => response.json()
         )
-        console.log(response)
-        if (response.data) {
-          const tableRows = response.data.map((person) => {
-            const tr = document.createElement("tr")
-            tr.innerHtml = `<td>${person.name}</td><td>${person.size}</td>`
-            return tr
-          })
+        const tableRows = response.map((person) => {
+          const tr = document.createElement("tr")
+          tr.innerHtml = `<td>${person.name}</td><td>${person.size}</td>`
+          return tr
+        })
+
+        if (tableRows.length > 0) {
+          const table = document.getElementById("sizes")
+          table.classList.remove("hidden")
+
+          const tbody = table.querySelector("tbody")
+          tbody.append(tableRows)
         }
       }
     </script>
