@@ -5,9 +5,107 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Socks</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        font-size: 20px;
+
+        --lightest-green: hsl(125 50% 86% / 0.5);
+        --darkest-green: hsl(125 30% 60% / 0.5);
+        --brown: hsl(34, 35%, 44%);
+        --edge: 160px;
+        --angle: 120deg;
+
+        background-color: var(--lightest-green);
+        background: repeating-linear-gradient(
+            var(--angle),
+            transparent 0,
+            transparent calc((var(--edge) / 2) - 1px),
+            var(--brown) calc((var(--edge) / 2) - 1px),
+            var(--brown) calc((var(--edge) / 2) + 1px),
+            transparent calc((var(--edge) / 2) + 1px),
+            transparent calc(var(--edge) + 1px)
+          ),
+          repeating-linear-gradient(
+            calc(var(--angle) * -1),
+            transparent 0,
+            transparent calc((var(--edge) / 2) - 1px),
+            var(--brown) calc((var(--edge) / 2) - 1px),
+            var(--brown) calc((var(--edge) / 2) + 1px),
+            transparent calc((var(--edge) / 2) + 1px),
+            transparent calc(var(--edge) + 1px)
+          ),
+          repeating-linear-gradient(
+            var(--angle),
+            var(--lightest-green) 0,
+            var(--lightest-green) var(--edge),
+            var(--darkest-green) var(--edge),
+            var(--darkest-green) calc(var(--edge) * 2)
+          ),
+          repeating-linear-gradient(
+            calc(var(--angle) * -1),
+            var(--lightest-green) 0,
+            var(--lightest-green) var(--edge),
+            var(--darkest-green) var(--edge),
+            var(--darkest-green) calc(var(--edge) * 2)
+          );
+        min-height: 100vh;
+      }
+
       .hidden {
         display: none;
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: repeat(4, max-content);
+        gap: 0.25em 1em;
+        width: 500px;
+        margin: auto;
+        background: hsl(125 0% 100% / 0.2);
+        padding: 2em;
+        box-shadow: 2px 2px 4px hsl(125 10% 10% / 0.2);
+      }
+
+      form > * {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        margin-bottom: 0.25em;
+      }
+      input {
+        margin-bottom: 1.2em;
+        border: 0;
+        border-bottom: 1px solid var(--brown);
+        background: hsl(0 0% 100% / 0.5);
+        padding: 0.5em;
+        font-size: 16px;
+      }
+
+      input[pattern] {
+        text-align: right;
+      }
+
+      button {
+        align-self: end;
+        background-color: hsl(125 30% 60%);
+        font-size: inherit;
+        border: 2px solid hsl(125 50% 90%);
+        padding: 0.5em 1em;
+      }
+
+      .full-width {
+        grid-column: 1 / -1;
       }
     </style>
   </head>
@@ -24,20 +122,36 @@
       <tbody></tbody>
     </table>
     <form action="/.netlify/functions/addPerson" method="POST">
-      <label for="name">Name</label>
-      <input id="name" name="name" />
+      <div class="full-width">
+        <label for="name">Name</label>
+        <input id="name" name="name" style="align-self: start" />
+      </div>
 
-      <label for="size">EU Size</label>
-      <input id="size" name="size" type="number" min="34" />
+      <div>
+        <label for="size">EU Size</label>
+        <input id="size" name="size" min="34" pattern="[\d]{2}" size="2" />
+      </div>
 
-      <div>or</div>
+      <div style="margin-top: 1em; margin-bottom: 1.5em">or</div>
 
-      <label for="size">Circumference (")</label>
-      <input id="size" name="circumference" type="number" min="4" />
-      <label for="size">Length (mm)</label>
-      <input id="size" name="length" type="number" min="200" />
+      <div>
+        <label for="size">Circumference (")</label>
+        <input
+          id="size"
+          name="circumference"
+          pattern="[\d]{1,2}"
+          min="4"
+          size="2"
+        />
+      </div>
+      <div>
+        <label for="size">Length (mm)</label>
+        <input id="size" name="length" pattern="[\d]{3}" min="200" size="3" />
+      </div>
 
-      <button>Save</button>
+      <div class="full-width">
+        <button>Save</button>
+      </div>
     </form>
     <script>
       document.body.onload = async function () {
