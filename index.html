@@ -54,7 +54,7 @@
         )
         const tableRows = response.map((person) => {
           const tr = document.createElement("tr")
-          tr.innerHtml = `<td>${person.name}</td><td>${person.size}</td>`
+          tr.innerHTML = `<td>${person.name}</td><td>${person.size}</td>`
           return tr
         })
 
