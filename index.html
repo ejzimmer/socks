@@ -186,6 +186,46 @@
       .full-width {
         grid-column: 1 / -1;
       }
+
+      #message {
+        border: 4px solid;
+        border-radius: 8px;
+        padding: 10px;
+        position: fixed;
+        top: -10px;
+        left: 50vw;
+        transform: translateX(-50%);
+        opacity: 0;
+      }
+
+      #message.error {
+        color: hsl(2, 80%, 30%);
+        background: hsl(2, 30%, 70%);
+      }
+
+      #message.success {
+        color: hsl(230, 56%, 53%);
+        background: hsl(231, 86%, 85%);
+      }
+
+      #message.enter {
+        animation: enter 5s;
+      }
+
+      @keyframes enter {
+        10% {
+          top: 40px;
+          opacity: 1;
+        }
+        90% {
+          top: 40px;
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+          top: -10px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -265,6 +305,11 @@
           ? `${params.name} added`
           : ""
         messageContainer.innerText = message
+
+        if (messageContainer.innerText) {
+          messageContainer.classList.add("enter")
+        }
+        messageContainer.classList.add(params.name ? "success" : "error")
 
         const response = await fetch("/.netlify/functions/listPeople").then(
           (response) => response.json()
