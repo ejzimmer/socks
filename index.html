@@ -96,6 +96,34 @@
         text-align: center;
       }
 
+      .loader {
+        margin-top: 0.5em;
+      }
+      .loader div {
+        height: 12px;
+        width: 100%;
+        border-radius: 100px;
+        margin-bottom: 0.5em;
+        background: linear-gradient(
+          to right,
+          var(--darkest-green),
+          var(--lightest-green) 20px,
+          var(--darkest-green) 40px
+        );
+        background-size: 200%;
+        animation: skeleton 4s linear infinite;
+      }
+
+      @keyframes skeleton {
+        from {
+          background-position-x: 100%;
+        }
+        50%,
+        to {
+          background-position-x: -100%;
+        }
+      }
+
       hr {
         margin: 40px 0;
         border: none;
@@ -163,7 +191,7 @@
   <body>
     <main>
       <div id="message"></div>
-      <table id="sizes" class="hidden">
+      <table id="sizes">
         <thead>
           <tr>
             <th>Cast-on stitches</th>
@@ -171,7 +199,18 @@
             <th>Name</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <tr>
+            <td colspan="3">
+              <div class="loader">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
       </table>
 
       <hr />
@@ -230,6 +269,7 @@
         const response = await fetch("/.netlify/functions/listPeople").then(
           (response) => response.json()
         )
+
         const tableRows = response.map((person) => {
           const castOnStitches = person.circumference * 8
 
