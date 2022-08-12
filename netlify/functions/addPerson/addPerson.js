@@ -1,13 +1,25 @@
 const { supabase } = require("../../../getSupabase.js")
 
 const SIZES = {
+  35: {
+    circumference: 7,
+    length: 228,
+  },
+  36: {
+    circumference: 7,
+    length: 235,
+  },
+  37: {
+    circumference: 7,
+    length: 238,
+  },
   38: {
     circumference: 8,
-    length: 237,
+    length: 245,
   },
   39: {
     circumference: 8,
-    length: 246,
+    length: 251,
   },
   40: {
     circumference: 8,
@@ -15,27 +27,27 @@ const SIZES = {
   },
   41: {
     circumference: 9,
-    length: 258,
+    length: 257,
   },
   42: {
     circumference: 9,
-    length: 262,
+    length: 260,
   },
   43: {
     circumference: 9,
-    length: 271,
+    length: 267,
   },
   44: {
     circumference: 10,
-    length: 275,
+    length: 273,
   },
   45: {
     circumference: 10,
-    length: 283,
+    length: 279,
   },
   46: {
     circumference: 10,
-    length: 288,
+    length: 282,
   },
 }
 
